@@ -7,6 +7,17 @@ public class Course {
 
     private int id;
     private String name;
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", author=" + author +
+                '}';
+    }
+
     private double price;
 
     public int getId() {
