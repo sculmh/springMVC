@@ -1,9 +1,10 @@
 package com.imooc.controller;
 
 import com.imooc.dao.CourseDao;
-import com.imooc.entity.Course;
+import com.imooc.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,5 +51,28 @@ public class DataBindController {
         return modelAndView;
     }
 
+    @RequestMapping("/userList")
+    @ResponseBody
+    public String listType(UserList userList) {
+        return userList.toString();
+    }
 
+    @RequestMapping("/setType")
+    @ResponseBody
+    public String setType(UserSet userSet) {
+        return userSet.toString();
+    }
+
+    @RequestMapping("/mapType")
+    @ResponseBody
+    public String mapType(UserMap userMap) {
+        return userMap.toString();
+    }
+
+    @RequestMapping("/jsonToObject")
+    @ResponseBody
+    public User JsonToObject(@RequestBody User user) {
+        user.setPassword("wow8975");
+        return user;
+    }
 }

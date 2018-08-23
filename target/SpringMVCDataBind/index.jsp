@@ -8,7 +8,7 @@
 <html>
 <head>
     <title>课程列表</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
