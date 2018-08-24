@@ -12,7 +12,7 @@
         <mvc:interceptor>
             <!--*表示当前路径，**表示包含子路径-->
             <mvc:mapping path="/user/**"/>
-            <bean class="com.imooc.core.LogInterceptor"></bean>
+            <bean class="com.imooc.core.LoginInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
 
