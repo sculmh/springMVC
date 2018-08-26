@@ -6,10 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="oa_biz" />
+        <module name="oa_dao" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Interceptor" target="1.7" />
-    </bytecodeTargetLevel>
   </component>
 </project>
