@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="oa_biz" />
         <module name="oa_dao" />
+        <module name="oa_web" />
       </profile>
     </annotationProcessing>
   </component>
