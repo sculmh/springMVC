@@ -2,14 +2,22 @@ package com.imooc.oa.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "employee", schema = "oa")
+
 public class Employee {
     private String sn;
     private String password;
     private String name;
     private String departmentSn;
     private String post;
+    private Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
     @Id
     @Column(name = "sn")
