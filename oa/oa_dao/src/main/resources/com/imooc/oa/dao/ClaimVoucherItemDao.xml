@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="com.imooc.oa.dao.ClaimVoucherItemDao">
     <resultMap id="resultMap" type="ClaimVoucherItem">
         <id property="id" column="id"></id>
         <result property="claimVoucherId" column="claim_voucher_id"></result>

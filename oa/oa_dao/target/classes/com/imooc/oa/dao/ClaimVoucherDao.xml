@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.oa.dao.ClaimVoucherDao">
+    <resultMap id="resultMap" type="com.imooc.oa.dao.ClaimVoucherDao">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="cause" property="cause" jdbcType="VARCHAR"/>
+        <result column="create_sn" property="createSn" jdbcType="CHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="next_deal_sn" property="nextDealSn" jdbcType="CHAR"/>
+        <result column="total_amount" property="totalAmount" jdbcType="DOUBLE"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <association property="creater" javaType="Employee">
+            <result column="cname" property="name"></result>
+            <result column="cpost" property="post"></result>
+        </association>
+        <association property="dealer" javaType="Employee">
+            <result column="dname" property="name"></result>
+            <result column="dpost" property="post"></result>
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, cause, create_sn, create_time, next_deal_sn, total_amount, status
+    </sql>
+    <!--删除账单-->
+    <delete id="delete">
+    delete from claim_voucher
+    where id = #{id}
+    </delete>
+    <!--增加账单-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into claim_voucher (cause, create_sn,
+          create_time, next_deal_sn, total_amount,
+          status)
+        values ( #{cause}, #{createSn},
+          #{createTime}, #{nextDealSn}, #{totalAmount},
+          #{status})
+     </insert>
+    <!--修改账单-->
+    <update id="update">
+        update claim_voucher
+        <set>
+            <if test="cause != null">
+                cause = #{cause},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="nextDealSn != null">
+                next_deal_sn = #{nextDealSn},
+            </if>
+            <if test="totalAmount != null">
+                total_amount = #{totalAmount},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--根据id选择账单-->
+    <select id="select" resultMap="resultMap">
+        select cv.*,ce.name cname,ce.post cpost,d.name dname,d.post dpost
+        from claim_voucher cv
+        left join employee ce on ce.sn=cv.create_sn
+        left join employee d on d.sn=cv.next_deal_sn
+        where cv.id=#{id}
+    </select>
+    <!--根据创建人选择账单-->
+    <select id="selectByCreateSn" resultMap="resultMap">
+        select cv.*,ce.name cname,ce.post cpost,d.name dname,d.post dpost
+        from claim_voucher cv
+        left join employee ce on ce.sn=cv.create_sn
+        left join employee d on d.sn=cv.next_deal_sn
+        where cv.create_sn=#{sn} order by cv.create_time desc
+    </select>
+    <!--根据处理人选择账单-->
+    <select id="selectByNextDealSn" resultMap="resultMap">
+        select cv.*,ce.name cname,ce.post cpost,d.name dname,d.post dpost
+        from claim_voucher cv
+        left join employee ce on ce.sn=cv.create_sn
+        left join employee d on d.sn=cv.next_deal_sn
+        where cv.next_deal_sn=#{sn} order by cv.create_time desc
+    </select>
+</mapper>

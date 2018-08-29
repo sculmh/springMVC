@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.oa.dao.DealRecordDao">
+    <resultMap id="resultMap" type="DealRecord">
+        <id column="id" property="id"></id>
+        <result column="claim_voucher_id" property="claimVoucherId"></result>
+        <result column="deal_sn" property="dealSn"></result>
+        <result column="deal_time" property="dealTime"></result>
+        <result column="deal_way" property="dealWay"></result>
+        <result column="deal_result" property="dealResult"></result>
+        <result column="comment" property="comment"></result>
+        <association property="dealer" javaType="Employee">
+            <result column="name" property="ename"></result>
+            <result column="post" property="post"></result>
+        </association>
+    </resultMap>
+
+    <!--增加记录-->
+    <insert id="insert">
+        insert into deal_record (claim_voucher_id, deal_sn, deal_time, deal_way, deal_result, comment)
+        values(#{claimVoucherId},#{dealSn},#{dealTime},#{dealWay},#{dealResult},#{comment})
+    </insert>
+    
+    <!--根据账单编号选择记录-->
+    <select id="selectByClaimVoucher" resultMap="resultMap">
+        select d.*,e.name,e.post from deal_record d left join employee e on d.deal_sn=e.sn
+         where d.claim_voucher_id = #{cvid} order by d.deal_time
+    </select>
+
+</mapper>

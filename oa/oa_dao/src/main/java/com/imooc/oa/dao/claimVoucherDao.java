@@ -1,15 +1,14 @@
 package com.imooc.oa.dao;
 
 import com.imooc.oa.entity.ClaimVoucher;
-import main.java.com.imooc.oa.temp.claimVoucher;
 
 import java.util.List;
 
-public interface claimVoucherDao {
+public interface ClaimVoucherDao {
 
-    void insert(claimVoucher record);
+    void insert(ClaimVoucher claimVoucher);
 
-    void update(claimVoucher record);
+    void update(ClaimVoucher record);
 
     void delete(int id);
 
