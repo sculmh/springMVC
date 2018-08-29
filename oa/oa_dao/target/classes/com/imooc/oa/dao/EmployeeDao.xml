@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.oa.dao.EmployeeDao">
+    <resultMap id="resultMap" type="Employee">
+        <id property="sn" column="sn"></id>
+        <result property="departmentSn" column="department_sn"></result>
+        <!--不能省略-->
+        <result property="post" column="post" javaType="String"/>
+        <result property="password" column="password" javaType="String"/>
+        <result property="name" column="name" javaType="String"/>
+        <!--has-a配置方式必须指定javaType-->
+        <association property="department" javaType="Department">
+            <id property="sn" column="dsn"></id>
+            <result property="name" column="dname"></result>
+        </association>
+    </resultMap>
+
+    <!--插入员工-->
+    <insert id="insert">
+        insert into employee values (#{sn},#{password},#{name},#{departmentSn},#{post});
+    </insert>
+
+    <!--修改员工信息-->
+    <update id="update">
+        update employee set name = #{name},password=#{password},department_sn=#{departmentSn},post=#{post}
+        where sn=#{sn}
+    </update>
+
+    <!--删除员工-->
+    <delete id="delete">
+        delete from employee where sn=#{sn}
+    </delete>
+
+    <!--查询单个员工-->
+    <select id="select" resultMap="resultMap">
+        select e.*,d.sn dsn,d.name dname from employee e left join department d on e.department_sn=d.sn
+         where e.sn=#{sn}
+    </select>
+
+    <!--查询所有员工-->
+    <select id="selectAll" resultMap="resultMap">
+        select e.*,d.sn dsn,d.name dname from employee e left join department d on e.department_sn=d.sn
+    </select>
+
+</mapper>

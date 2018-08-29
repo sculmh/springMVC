@@ -19,8 +19,7 @@ public class Employee {
         this.department = department;
     }
 
-    @Id
-    @Column(name = "sn")
+
     public String getSn() {
         return sn;
     }
@@ -29,8 +28,6 @@ public class Employee {
         this.sn = sn;
     }
 
-    @Basic
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -39,8 +36,7 @@ public class Employee {
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "name")
+
     public String getName() {
         return name;
     }
@@ -49,8 +45,6 @@ public class Employee {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "department_sn")
     public String getDepartmentSn() {
         return departmentSn;
     }
@@ -59,8 +53,6 @@ public class Employee {
         this.departmentSn = departmentSn;
     }
 
-    @Basic
-    @Column(name = "post")
     public String getPost() {
         return post;
     }

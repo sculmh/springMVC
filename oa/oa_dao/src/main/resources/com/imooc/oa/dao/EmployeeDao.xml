@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="com.imooc.oa.dao.EmployeeDao">
     <resultMap id="resultMap" type="Employee">
         <id property="sn" column="sn"></id>
         <result property="departmentSn" column="department_sn"></result>
-        <association property="department" column="department_sn">
+        <!--不能省略-->
+        <result property="post" column="post" javaType="String"/>
+        <result property="password" column="password" javaType="String"/>
+        <result property="name" column="name" javaType="String"/>
+        <!--has-a配置方式必须指定javaType-->
+        <association property="department" javaType="Department">
             <id property="sn" column="dsn"></id>
             <result property="name" column="dname"></result>
         </association>
@@ -12,7 +17,7 @@
 
     <!--插入员工-->
     <insert id="insert">
-        insert into employee values (#{sn},#{passowrd},#{name},#{departmentSn},#{post});
+        insert into employee values (#{sn},#{password},#{name},#{departmentSn},#{post});
     </insert>
 
     <!--修改员工信息-->
