@@ -4,8 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
-@Entity
-@Table(name = "claim_voucher", schema = "oa")
+
 public class ClaimVoucher {
     private int id;
     private String cause;
@@ -14,6 +13,26 @@ public class ClaimVoucher {
     private String nextDealSn;
     private Double totalAmount;
     private String status;
+    private Employee creater;       // 创建人
+
+    public Employee getCreater() {
+        return creater;
+    }
+
+    public void setCreater(Employee creater) {
+        this.creater = creater;
+    }
+
+    public Employee getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(Employee dealer) {
+        this.dealer = dealer;
+    }
+
+    private Employee dealer;       // 处理人
+
 
     @Id
     @Column(name = "id")

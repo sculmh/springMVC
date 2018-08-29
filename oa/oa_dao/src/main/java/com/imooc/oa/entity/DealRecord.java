@@ -4,8 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
-@Entity
-@Table(name = "deal_record", schema = "oa")
+
 public class DealRecord {
     private int id;
     private Integer claimVoucherId;
@@ -14,6 +13,15 @@ public class DealRecord {
     private String dealWay;
     private String dealResult;
     private String comment;
+    private Employee dealer;    // 处理人
+
+    public Employee getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(Employee dealer) {
+        this.dealer = dealer;
+    }
 
     @Id
     @Column(name = "id")
