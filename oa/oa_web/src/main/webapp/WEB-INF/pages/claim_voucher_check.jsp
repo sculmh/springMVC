@@ -72,13 +72,13 @@
                             </div>
                             <div class="panel-footer text-right">
 
-                                <c:if test="${sessionScope.employee.post==Contant.POST_FM || sessionScope.employee.post==Contant.POST_GM}">
-                                    <button type="submit" class="button" name="dealWay" value="${Contant.DEAL_PASS}" >${Contant.DEAL_PASS}</button>
-                                    <button type="submit" class="button" name="dealWay" value="${Contant.DEAL_BACK}" >${Contant.DEAL_BACK}</button>
-                                    <button type="submit" class="button" name="dealWay" value="${Contant.DEAL_REJECT}" >${Contant.DEAL_REJECT}</button>
+                                <c:if test="${sessionScope.employee.post==Constant.POST_FM || sessionScope.employee.post==Constant.POST_GM}">
+                                    <button type="submit" class="button" name="dealWay" value="${Constant.DEAL_PASS}" >${Constant.DEAL_PASS}</button>
+                                    <button type="submit" class="button" name="dealWay" value="${Constant.DEAL_BACK}" >${Constant.DEAL_BACK}</button>
+                                    <button type="submit" class="button" name="dealWay" value="${Constant.DEAL_REJECT}" >${Constant.DEAL_REJECT}</button>
                                 </c:if>
-                                <c:if test="${sessionScope.employee.post==Contant.POST_CASHIER}">
-                                    <button type="submit" class="button" name="dealWay" value="${Contant.DEAL_PAID}" >${Contant.DEAL_PAID}</button>
+                                <c:if test="${sessionScope.employee.post==Constant.POST_CASHIER}">
+                                    <button type="submit" class="button" name="dealWay" value="${Constant.DEAL_PAID}" >${Constant.DEAL_PAID}</button>
                                 </c:if>
                                 <button type="button" class="button" onclick="javascript:window.history.go(-1);"> 返回 </button>
                             </div>
