@@ -23,7 +23,7 @@
     
     <!--根据账单编号选择记录-->
     <select id="selectByClaimVoucher" resultMap="resultMap">
-        select d.*,e.name,e.post from deal_record d left join employee e on d.deal_sn=e.sn
+        select d.*,e.name ename,e.post epost from deal_record d left join employee e on d.deal_sn=e.sn
          where d.claim_voucher_id = #{cvid} order by d.deal_time
     </select>
 
