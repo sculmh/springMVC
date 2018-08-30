@@ -71,14 +71,14 @@
                                 <td class="text-center fw600">${cv.totalAmount}</td>
                                 <td><fmt:formatDate value="${cv.createTime}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
                                 <td>
-                                    <c:if test="${cv.status==Contant.CLAIMVOUCHER_CREATED || cv.status==Contant.CLAIMVOUCHER_BACK}">
+                                    <c:if test="${cv.status==Constant.CLAIMVOUCHER_CREATED || cv.status==Constant.CLAIMVOUCHER_BACK}">
                                         <a href="${pageContext.request.contextPath}/claim_voucher/to_update?id=${cv.id}">修改</a>
                                         <a href="${pageContext.request.contextPath}/claim_voucher/submit?id=${cv.id}">提交</a>
                                     </c:if>
-                                    <c:if test="${cv.status==Contant.CLAIMVOUCHER_SUBMIT || cv.status==Contant.CLAIMVOUCHER_RECHECK}">
+                                    <c:if test="${cv.status==Constant.CLAIMVOUCHER_SUBMIT || cv.status==Constant.CLAIMVOUCHER_RECHECK}">
                                         <a href="${pageContext.request.contextPath}/claim_voucher/to_check?id=${cv.id}">审核</a>
                                     </c:if>
-                                    <c:if test="${cv.status==Contant.CLAIMVOUCHER_APPROVED}">
+                                    <c:if test="${cv.status==Constant.CLAIMVOUCHER_APPROVED}">
                                         <a href="${pageContext.request.contextPath}/claim_voucher/to_check?id=${cv.id}">打款</a>
                                     </c:if>
                                     <a href="${pageContext.request.contextPath}/claim_voucher/detail?id=${cv.id}">详细信息</a>

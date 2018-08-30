@@ -75,5 +75,28 @@ public class ClaimVoucherController {
         return "claim_voucher_deal";
     }
 
+    /**
+     * 申请修改账单
+     */
+    @RequestMapping("/to_update")
+    public String toUpdate(int id,Model model) {
+        model.addAttribute("items",Constant.getItems());
+        ClaimVoucherInfo info = new ClaimVoucherInfo();
+        info.setClaimVoucher(claimVoucherBiz.get(id));
+        info.setItems(claimVoucherBiz.getItems(id));
+        model.addAttribute("info",info);
+        return "claim_voucher_update";
+    }
+
+    /**
+     * 修改账单
+     */
+    @RequestMapping("/update")
+    public String update(HttpSession session,ClaimVoucherInfo info) {
+        claimVoucherBiz.update(info.getClaimVoucher(),info.getItems());
+        return "redirect:deal";
+    }
+
+
 
 }

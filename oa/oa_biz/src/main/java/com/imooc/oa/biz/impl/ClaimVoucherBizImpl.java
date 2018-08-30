@@ -43,7 +43,7 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
         // 设置报销单具体信息
         claimVoucher.setCreateTime(new Date());
         claimVoucher.setNextDealSn(claimVoucher.getCreateSn());
-        claimVoucher.setStatus(Constant.DEAL_CREATE);
+        claimVoucher.setStatus(Constant.CLAIMVOUCHER_CREATED);
         // 保存
         claimVoucherDao.insert(claimVoucher);
         // 获取报销单编号
@@ -57,19 +57,66 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
 
     }
 
+    /**
+     * 根据id获取报销单
+     * @param id
+     * @return
+     */
     public ClaimVoucher get(int id) {
         return claimVoucherDao.select(id);
     }
 
+    /**
+     * 根据id获取报销单条目
+     * @param id
+     * @return
+     */
     public List<ClaimVoucherItem> getItems(int id) {
         return claimVoucherItemDao.selectByClaimVoucher(id);
     }
 
+    /**
+     * 根据id获取报销单处理记录
+     * @param id
+     * @return
+     */
     public List<DealRecord> getRecords(int id) {
         return dealRecordDao.selectByClaimVoucher(id);
     }
 
+    /**
+     * 修改报销单
+     * @param claimVoucher
+     * @param items
+     */
     public void update(ClaimVoucher claimVoucher, List<ClaimVoucherItem> items) {
+        // 更新报销单
+        claimVoucherDao.update(claimVoucher);
+        // 查询旧条目
+        List<ClaimVoucherItem> olds = claimVoucherItemDao.selectByClaimVoucher(claimVoucher.getId());
+        // 遍历旧条目
+        for (ClaimVoucherItem old:olds) {
+            boolean has = false;
+            for (ClaimVoucherItem item:items) {
+                if (old.getId() == item.getId()) {
+                    has = true;
+                    break;
+                }
+            }
+            if (has == false)
+                // 删除旧条目
+                claimVoucherItemDao.delete(old.getId());
+        }
+
+        for (ClaimVoucherItem item:items) {
+            if (item.getId() > 0) {
+                // 修改条目
+                claimVoucherItemDao.update(item);
+            } else {
+                // 增加条目
+                claimVoucherItemDao.insert(item);
+            }
+        }
 
     }
 
