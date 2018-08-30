@@ -41,5 +41,15 @@
     <select id="selectAll" resultMap="resultMap">
         select e.*,d.sn dsn,d.name dname from employee e left join department d on e.department_sn=d.sn
     </select>
-
+    <!--根据部门和职务查询员工-->
+    <select id="selectByDepartmentAndPost" resultMap="resultMap">
+        select e.*,d.sn dsn,d.name dname from employee e left join department d on e.department_sn=d.sn
+        where 1=1
+        <if test="dsn != null">
+            and e.department_sn = #{dsn}
+        </if>
+        <if test="post != null">
+            and e.post = #{post}
+        </if>
+    </select>
 </mapper>

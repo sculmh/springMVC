@@ -24,5 +24,8 @@ public interface ClaimVoucherBiz {
     List<ClaimVoucher> getForSelf(String sn);
     // 获取待处理者的报销单
     List<ClaimVoucher> getForDeal(String sn);
-
+    // 提交报销单
+    void submit(int id);
+    // 审核报销单
+    void deal(DealRecord dealRecord);
 }

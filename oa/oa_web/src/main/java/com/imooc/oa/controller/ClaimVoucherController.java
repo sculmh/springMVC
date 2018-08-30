@@ -2,6 +2,7 @@ package com.imooc.oa.controller;
 
 import com.imooc.oa.biz.ClaimVoucherBiz;
 import com.imooc.oa.dto.ClaimVoucherInfo;
+import com.imooc.oa.entity.DealRecord;
 import com.imooc.oa.entity.Employee;
 import com.imooc.oa.global.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +98,40 @@ public class ClaimVoucherController {
         return "redirect:deal";
     }
 
+    /**
+     * 提交账单
+     */
+    @RequestMapping("/submit")
+    public String submit(int id) {
+        claimVoucherBiz.submit(id);
+        return "redirect:deal";
+    }
 
+    /**
+     * 请求审核报销单
+     */
+    @RequestMapping("/to_check")
+    public String toCheck(int id,Model model) {
+        model.addAttribute("claimVoucher",claimVoucherBiz.get(id));
+        model.addAttribute("items",claimVoucherBiz.getItems(id));
+        model.addAttribute("records",claimVoucherBiz.getRecords(id));
+        // 新的报销单处理记录
+        DealRecord dealRecord = new DealRecord();
+        dealRecord.setClaimVoucherId(id);
+        model.addAttribute(dealRecord);
+        return "claim_voucher_check";
+    }
+
+    /**
+     * 审核报销单
+     */
+    @RequestMapping("/check")
+    public String check(HttpSession session,DealRecord dealRecord) {
+        Employee employee = (Employee) session.getAttribute("employee");
+        // 设置处理人
+        dealRecord.setDealSn(employee.getSn());
+        claimVoucherBiz.deal(dealRecord);
+        return "redirect:deal";
+    }
 
 }
