@@ -72,4 +72,22 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
     public void update(ClaimVoucher claimVoucher, List<ClaimVoucherItem> items) {
 
     }
+
+    /**
+     * 获取创建者的报销单
+     * @param sn
+     * @return
+     */
+    public List<ClaimVoucher> getForSelf(String sn) {
+        return claimVoucherDao.selectByCreateSn(sn);
+    }
+
+    /**
+     * 获取待处理者的报销单
+     * @param sn
+     * @return
+     */
+    public List<ClaimVoucher> getForDeal(String sn) {
+        return claimVoucherDao.selectByNextDealSn(sn);
+    }
 }

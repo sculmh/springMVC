@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.imooc.oa.dao.ClaimVoucherDao">
-    <resultMap id="resultMap" type="com.imooc.oa.dao.ClaimVoucherDao">
+    <resultMap id="resultMap" type="ClaimVoucher">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="cause" property="cause" jdbcType="VARCHAR"/>
         <result column="create_sn" property="createSn" jdbcType="CHAR"/>

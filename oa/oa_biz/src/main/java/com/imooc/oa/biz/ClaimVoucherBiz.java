@@ -20,6 +20,9 @@ public interface ClaimVoucherBiz {
     List<DealRecord> getRecords(int id);
     // 修改报销单
     void update(ClaimVoucher claimVoucher, List<ClaimVoucherItem> items);
-
+    // 获取创建者的报销单
+    List<ClaimVoucher> getForSelf(String sn);
+    // 获取待处理者的报销单
+    List<ClaimVoucher> getForDeal(String sn);
 
 }

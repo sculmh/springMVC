@@ -38,7 +38,7 @@ public class ClaimVoucherController {
         Employee employee = (Employee) session.getAttribute("employee");
         info.getClaimVoucher().setCreateSn(employee.getSn());
         claimVoucherBiz.save(info.getClaimVoucher(),info.getItems());
-        return "redirect:detail?" + info.getClaimVoucher().getId();
+        return "redirect:detail?id=" + info.getClaimVoucher().getId();
     }
 
     /**
@@ -46,9 +46,34 @@ public class ClaimVoucherController {
      */
     @RequestMapping("/detail")
     public String detail(int id,Model model) {
+        System.out.println("id=" + id);
         model.addAttribute("claimVoucher",claimVoucherBiz.get(id));
         model.addAttribute("items",claimVoucherBiz.getItems(id));
         model.addAttribute("records",claimVoucherBiz.getRecords(id));
         return "claim_voucher_detail";
     }
+
+    /**
+     * 查看自己创建的账单
+     */
+    @RequestMapping("/self")
+    public String self(HttpSession session,Model model) {
+        Employee employee = (Employee) session.getAttribute("employee");
+        // 查询账单
+        model.addAttribute("list",claimVoucherBiz.getForSelf(employee.getSn()));
+        return "claim_voucher_self";
+    }
+
+    /**
+     * 查看待处理的账单
+     */
+    @RequestMapping("/deal")
+    public String deal(HttpSession session,Model model) {
+        Employee employee = (Employee) session.getAttribute("employee");
+        // 查询账单
+        model.addAttribute("list",claimVoucherBiz.getForDeal(employee.getSn()));
+        return "claim_voucher_deal";
+    }
+
+
 }

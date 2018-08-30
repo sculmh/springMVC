@@ -1,6 +1,6 @@
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false"%>
 
@@ -25,7 +25,7 @@
                         <div class="col-md-2">创建人</div>
                         <div class="col-md-4">${claimVoucher.creater.name}</div>
                         <div class="col-md-2">创建时间</div>
-                        <div class="col-md-4"><spring:eval expression="claimVoucher.createTime"/></div>
+                        <div class="col-md-4"><fmt:formatDate value="${claimVoucher.createTime}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate> </div>
                     </div>
                     <div class="section row">
                         <div class="col-md-2">待处理人</div>
@@ -53,7 +53,7 @@
                     <div class="section row">
                         <c:forEach items="${records}" var="record">
                             <div class="col-md-1">${record.dealer.name}</div>
-                            <div class="col-md-3"><spring:eval expression="record.dealTime"/></div>
+                            <div class="col-md-3"><fmt:formatDate value="${record.dealTime}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></div>
                             <div class="col-md-1">${record.dealWay}</div>
                             <div class="col-md-2">${record.dealWay}</div>
                             <div class="col-md-5">备注：${record.comment}</div>
