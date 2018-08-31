@@ -60,7 +60,7 @@
                         </c:forEach>
                     </div>
                     <form:form id="admin-form" name="addForm" action="${pageContext.request.contextPath}/claim_voucher/check" modelAttribute="dealRecord">
-                        <form:hidden path="claimVoucherId" />
+                        <form:hidden path="claimVoucherId"/>
                         <div class="panel-body bg-light">
                             <div class="section">
                                 <label for="comment" class="field prepend-icon">

@@ -118,7 +118,7 @@ public class ClaimVoucherController {
         // 新的报销单处理记录
         DealRecord dealRecord = new DealRecord();
         dealRecord.setClaimVoucherId(id);
-        model.addAttribute(dealRecord);
+        model.addAttribute("dealRecord",dealRecord);
         return "claim_voucher_check";
     }
 

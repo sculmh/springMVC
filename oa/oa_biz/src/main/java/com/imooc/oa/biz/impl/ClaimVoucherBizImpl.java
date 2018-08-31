@@ -176,7 +176,7 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
      */
     public void deal(DealRecord dealRecord) {
         // 获取报销单
-        ClaimVoucher claimVoucher = claimVoucherDao.select(dealRecord.getId());
+        ClaimVoucher claimVoucher = claimVoucherDao.select(dealRecord.getClaimVoucherId());
         Employee employee = employeeDao.select(dealRecord.getDealSn());
         dealRecord.setDealTime(new Date());
 
@@ -206,13 +206,13 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
             claimVoucher.setNextDealSn(claimVoucher.getCreateSn());
 
             dealRecord.setDealResult(Constant.CLAIMVOUCHER_BACK);
-        } else if (Constant.DEAL_BACK.equals(dealWay)) {
+        } else if (Constant.DEAL_REJECT.equals(dealWay)) {
             // 拒绝
             claimVoucher.setStatus(Constant.CLAIMVOUCHER_TERMINATED);
             claimVoucher.setNextDealSn(null);
 
             dealRecord.setDealResult(Constant.CLAIMVOUCHER_TERMINATED);
-        } else if (Constant.DEAL_BACK.equals(dealWay)) {
+        } else if (Constant.DEAL_PAID.equals(dealWay)) {
             // 打款
             claimVoucher.setStatus(Constant.CLAIMVOUCHER_PAID);
             claimVoucher.setNextDealSn(null);
